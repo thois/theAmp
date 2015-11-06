@@ -7,7 +7,7 @@
 //
 
 #include "FenderEQ.h"
-#include <math.h>
+#include <cmath>
 
 
 void FenderEQ::set_samplerate(double samplerate)
