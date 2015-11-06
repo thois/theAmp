@@ -9,9 +9,6 @@
 #ifndef FenderEQ_h
 #define FenderEQ_h
 
-#include <stdio.h>
-#include <math.h>
-
 class FenderEQ
 {
 private:
