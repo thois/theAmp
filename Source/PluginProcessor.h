@@ -12,17 +12,18 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "FenderEQ.h"
 
 
 //==============================================================================
 /**
 */
-class TheAmpAudioProcessor  : public AudioProcessor
+class EqAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    TheAmpAudioProcessor();
-    ~TheAmpAudioProcessor();
+    EqAudioProcessor();
+    ~EqAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -67,7 +68,8 @@ public:
 
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheAmpAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EqAudioProcessor)
+    FenderEQ fender;
 };
 
 

@@ -10,68 +10,69 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "FenderEQ.h"
 
 
 //==============================================================================
-TheAmpAudioProcessor::TheAmpAudioProcessor()
+EqAudioProcessor::EqAudioProcessor()
 {
 }
 
-TheAmpAudioProcessor::~TheAmpAudioProcessor()
+EqAudioProcessor::~EqAudioProcessor()
 {
 }
 
 //==============================================================================
-const String TheAmpAudioProcessor::getName() const
+const String EqAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-int TheAmpAudioProcessor::getNumParameters()
+int EqAudioProcessor::getNumParameters()
 {
     return 0;
 }
 
-float TheAmpAudioProcessor::getParameter (int index)
+float EqAudioProcessor::getParameter (int index)
 {
     return 0.0f;
 }
 
-void TheAmpAudioProcessor::setParameter (int index, float newValue)
+void EqAudioProcessor::setParameter (int index, float newValue)
 {
 }
 
-const String TheAmpAudioProcessor::getParameterName (int index)
-{
-    return String();
-}
-
-const String TheAmpAudioProcessor::getParameterText (int index)
+const String EqAudioProcessor::getParameterName (int index)
 {
     return String();
 }
 
-const String TheAmpAudioProcessor::getInputChannelName (int channelIndex) const
+const String EqAudioProcessor::getParameterText (int index)
+{
+    return String();
+}
+
+const String EqAudioProcessor::getInputChannelName (int channelIndex) const
 {
     return String (channelIndex + 1);
 }
 
-const String TheAmpAudioProcessor::getOutputChannelName (int channelIndex) const
+const String EqAudioProcessor::getOutputChannelName (int channelIndex) const
 {
     return String (channelIndex + 1);
 }
 
-bool TheAmpAudioProcessor::isInputChannelStereoPair (int index) const
+bool EqAudioProcessor::isInputChannelStereoPair (int index) const
 {
     return true;
 }
 
-bool TheAmpAudioProcessor::isOutputChannelStereoPair (int index) const
+bool EqAudioProcessor::isOutputChannelStereoPair (int index) const
 {
     return true;
 }
 
-bool TheAmpAudioProcessor::acceptsMidi() const
+bool EqAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -80,7 +81,7 @@ bool TheAmpAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool TheAmpAudioProcessor::producesMidi() const
+bool EqAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -89,94 +90,99 @@ bool TheAmpAudioProcessor::producesMidi() const
    #endif
 }
 
-bool TheAmpAudioProcessor::silenceInProducesSilenceOut() const
+bool EqAudioProcessor::silenceInProducesSilenceOut() const
 {
     return false;
 }
 
-double TheAmpAudioProcessor::getTailLengthSeconds() const
+double EqAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int TheAmpAudioProcessor::getNumPrograms()
+int EqAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int TheAmpAudioProcessor::getCurrentProgram()
+int EqAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void TheAmpAudioProcessor::setCurrentProgram (int index)
+void EqAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const String TheAmpAudioProcessor::getProgramName (int index)
+const String EqAudioProcessor::getProgramName (int index)
 {
     return String();
 }
 
-void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
+void EqAudioProcessor::changeProgramName (int index, const String& newName)
 {
 }
 
 //==============================================================================
-void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void EqAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+	fender.set_samplerate(sampleRate);
+    fender.set_values(0.5, 0.5, 0.5);
 }
 
-void TheAmpAudioProcessor::releaseResources()
+void EqAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
-void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void EqAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // I've added this to avoid people getting screaming feedback
-    // when they first compile the plugin, but obviously you don't need to
-    // this code if your algorithm already fills all the output channels.
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
+    //Some useful parameters
+    const int numInputChannels = getNumInputChannels();
+    const int numSamples = buffer.getNumSamples();
+    int channel;
+    
+    for (channel = 0; channel < numInputChannels; channel++)
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
         float* channelData = buffer.getWritePointer (channel);
+        
+        for (int n = 0 ; n < numSamples; n++)
+        {
+            //The real processing, calculating the output, updating buffers etc.
+            
+            double data = fender.filter_sample(channelData[n], channel);
+            channelData[n] = data;
+        }
 
-        // ..do something to the data...
     }
 }
 
 //==============================================================================
-bool TheAmpAudioProcessor::hasEditor() const
+bool EqAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-AudioProcessorEditor* TheAmpAudioProcessor::createEditor()
+AudioProcessorEditor* EqAudioProcessor::createEditor()
 {
-    return new TheAmpAudioProcessorEditor (*this);
+    return new EqAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void TheAmpAudioProcessor::getStateInformation (MemoryBlock& destData)
+void EqAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void EqAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -186,5 +192,5 @@ void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInByte
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new TheAmpAudioProcessor();
+    return new EqAudioProcessor();
 }
