@@ -93,3 +93,12 @@ double FenderEQ::filter_sample(double sample, int channel)
     feedback[0][channel] = output;
     return output;
 }
+
+AudioSampleBuffer& FenderEQ::operator() (AudioSampleBuffer& buffer) {
+	// TODO check AudioSampleBuffer for correct number of channels
+	for(size_t chan = 0; chan < channels; chan++) {
+		float* data = buffer.getWritePointer(chan);
+		for(size_t i = 0; i < buffer.getNumSamples(); i++)
+		  data[i] = filter_sample(data[i], chan);
+	}
+}

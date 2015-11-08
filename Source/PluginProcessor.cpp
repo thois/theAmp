@@ -14,65 +14,65 @@
 
 
 //==============================================================================
-EqAudioProcessor::EqAudioProcessor()
+TheAmpAudioProcessor::TheAmpAudioProcessor()
 {
 }
 
-EqAudioProcessor::~EqAudioProcessor()
+TheAmpAudioProcessor::~TheAmpAudioProcessor()
 {
 }
 
 //==============================================================================
-const String EqAudioProcessor::getName() const
+const String TheAmpAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-int EqAudioProcessor::getNumParameters()
+int TheAmpAudioProcessor::getNumParameters()
 {
     return 0;
 }
 
-float EqAudioProcessor::getParameter (int index)
+float TheAmpAudioProcessor::getParameter (int index)
 {
     return 0.0f;
 }
 
-void EqAudioProcessor::setParameter (int index, float newValue)
+void TheAmpAudioProcessor::setParameter (int index, float newValue)
 {
 }
 
-const String EqAudioProcessor::getParameterName (int index)
-{
-    return String();
-}
-
-const String EqAudioProcessor::getParameterText (int index)
+const String TheAmpAudioProcessor::getParameterName (int index)
 {
     return String();
 }
 
-const String EqAudioProcessor::getInputChannelName (int channelIndex) const
+const String TheAmpAudioProcessor::getParameterText (int index)
+{
+    return String();
+}
+
+const String TheAmpAudioProcessor::getInputChannelName (int channelIndex) const
 {
     return String (channelIndex + 1);
 }
 
-const String EqAudioProcessor::getOutputChannelName (int channelIndex) const
+const String TheAmpAudioProcessor::getOutputChannelName (int channelIndex) const
 {
     return String (channelIndex + 1);
 }
 
-bool EqAudioProcessor::isInputChannelStereoPair (int index) const
+bool TheAmpAudioProcessor::isInputChannelStereoPair (int index) const
 {
     return true;
 }
 
-bool EqAudioProcessor::isOutputChannelStereoPair (int index) const
+bool TheAmpAudioProcessor::isOutputChannelStereoPair (int index) const
 {
     return true;
 }
 
-bool EqAudioProcessor::acceptsMidi() const
+bool TheAmpAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -81,7 +81,7 @@ bool EqAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool EqAudioProcessor::producesMidi() const
+bool TheAmpAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -90,54 +90,54 @@ bool EqAudioProcessor::producesMidi() const
    #endif
 }
 
-bool EqAudioProcessor::silenceInProducesSilenceOut() const
+bool TheAmpAudioProcessor::silenceInProducesSilenceOut() const
 {
     return false;
 }
 
-double EqAudioProcessor::getTailLengthSeconds() const
+double TheAmpAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int EqAudioProcessor::getNumPrograms()
+int TheAmpAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int EqAudioProcessor::getCurrentProgram()
+int TheAmpAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void EqAudioProcessor::setCurrentProgram (int index)
+void TheAmpAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const String EqAudioProcessor::getProgramName (int index)
+const String TheAmpAudioProcessor::getProgramName (int index)
 {
     return String();
 }
 
-void EqAudioProcessor::changeProgramName (int index, const String& newName)
+void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
 {
 }
 
 //==============================================================================
-void EqAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
 	fender.set_samplerate(sampleRate);
     fender.set_values(0.5, 0.5, 0.5);
 }
 
-void EqAudioProcessor::releaseResources()
+void TheAmpAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
-void EqAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
@@ -146,7 +146,7 @@ void EqAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midi
     const int numInputChannels = getNumInputChannels();
     const int numSamples = buffer.getNumSamples();
     int channel;
-    
+
     for (channel = 0; channel < numInputChannels; channel++)
 
     {
@@ -164,25 +164,25 @@ void EqAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midi
 }
 
 //==============================================================================
-bool EqAudioProcessor::hasEditor() const
+bool TheAmpAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-AudioProcessorEditor* EqAudioProcessor::createEditor()
+AudioProcessorEditor* TheAmpAudioProcessor::createEditor()
 {
-    return new EqAudioProcessorEditor (*this);
+    return new TheAmpAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void EqAudioProcessor::getStateInformation (MemoryBlock& destData)
+void TheAmpAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void EqAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -192,5 +192,5 @@ void EqAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new EqAudioProcessor();
+    return new TheAmpAudioProcessor();
 }

@@ -18,12 +18,12 @@
 //==============================================================================
 /**
 */
-class EqAudioProcessor  : public AudioProcessor
+class TheAmpAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    EqAudioProcessor();
-    ~EqAudioProcessor();
+    TheAmpAudioProcessor();
+    ~TheAmpAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -68,7 +68,7 @@ public:
 
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EqAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheAmpAudioProcessor)
     FenderEQ fender;
 };
 

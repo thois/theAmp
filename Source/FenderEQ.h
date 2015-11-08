@@ -9,6 +9,8 @@
 #ifndef FenderEQ_h
 #define FenderEQ_h
 
+#include "../JuceLibraryCode/JuceHeader.h"
+
 class FenderEQ
 {
 private:
@@ -27,8 +29,8 @@ private:
     //Zeroes and poles of the transfer function:
     double B0, B1, B2, B3, A0, A1, A2, A3;
     //Simple buffers of length 3 (no need for longer, and because its so small, it isn't neccessary to use circular buffer). 
-    double feedback[3][2] = {0};
-    double feedforward[3][2] = {0};
+    double feedback[3][2] = {{0}};
+    double feedforward[3][2] = {{0}};
 
 	double fs = 48000;
     
@@ -43,6 +45,8 @@ public:
 
 	//Function to set correct samplerate:
 	void set_samplerate(double);
+
+	AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
     
 };
 
