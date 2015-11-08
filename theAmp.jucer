@@ -11,6 +11,10 @@
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.2.0">
   <MAINGROUP id="RMunW0" name="theAmp">
     <GROUP id="{8DA5E078-B0E1-41E6-A57B-AD1C7905AA98}" name="Source">
+      <FILE id="Wx8vwv" name="IirFilter.cpp" compile="1" resource="0" file="Source/IirFilter.cpp"/>
+      <FILE id="L3gq4m" name="IirFilter.h" compile="0" resource="0" file="Source/IirFilter.h"/>
+      <FILE id="l2bu82" name="DriveStage.cpp" compile="1" resource="0" file="Source/DriveStage.cpp"/>
+      <FILE id="lixx6I" name="DriveStage.h" compile="0" resource="0" file="Source/DriveStage.h"/>
       <FILE id="S7v0Vp" name="FenderEQ.cpp" compile="1" resource="0" file="Source/FenderEQ.cpp"/>
       <FILE id="cO45bI" name="FenderEQ.h" compile="0" resource="0" file="Source/FenderEQ.h"/>
       <FILE id="xnIYXF" name="PluginProcessor.cpp" compile="1" resource="0"

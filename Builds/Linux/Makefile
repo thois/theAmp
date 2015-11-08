@@ -49,6 +49,8 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/IirFilter_eda5d9cb.o \
+  $(OBJDIR)/DriveStage_36ba4b1d.o \
   $(OBJDIR)/FenderEQ_3e8885d7.o \
   $(OBJDIR)/PluginProcessor_a059e380.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
@@ -85,6 +87,16 @@ clean:
 strip:
 	@echo Stripping theAmp
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/IirFilter_eda5d9cb.o: ../../Source/IirFilter.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling IirFilter.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DriveStage_36ba4b1d.o: ../../Source/DriveStage.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DriveStage.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/FenderEQ_3e8885d7.o: ../../Source/FenderEQ.cpp
 	-@mkdir -p $(OBJDIR)

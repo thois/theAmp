@@ -12,7 +12,6 @@
 #include "PluginEditor.h"
 #include "FenderEQ.h"
 
-
 //==============================================================================
 TheAmpAudioProcessor::TheAmpAudioProcessor()
 {
@@ -129,6 +128,9 @@ void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
 	fender.set_samplerate(sampleRate);
     fender.set_values(0.5, 0.5, 0.5);
+    driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 250));
+    driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 250));
+    driveStages.push_back(DriveStage(sampleRate, 6000, 70, 20, 0.008, 250));
 }
 
 void TheAmpAudioProcessor::releaseResources()
@@ -139,28 +141,9 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-    
-    //Some useful parameters
-    const int numInputChannels = getNumInputChannels();
-    const int numSamples = buffer.getNumSamples();
-    int channel;
-
-    for (channel = 0; channel < numInputChannels; channel++)
-
-    {
-        float* channelData = buffer.getWritePointer (channel);
-        
-        for (int n = 0 ; n < numSamples; n++)
-        {
-            //The real processing, calculating the output, updating buffers etc.
-            
-            double data = fender.filter_sample(channelData[n], channel);
-            channelData[n] = data;
-        }
-
-    }
+  buffer = fender(buffer);
+  for (DriveStage& stage : driveStages)
+    buffer = stage(buffer);
 }
 
 //==============================================================================
