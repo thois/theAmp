@@ -11,6 +11,10 @@
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.2.0">
   <MAINGROUP id="RMunW0" name="theAmp">
     <GROUP id="{8DA5E078-B0E1-41E6-A57B-AD1C7905AA98}" name="Source">
+      <FILE id="pQ8Q8r" name="FirFilter.cpp" compile="1" resource="0" file="Source/FirFilter.cpp"/>
+      <FILE id="MyWNgm" name="FirFilter.h" compile="0" resource="0" file="Source/FirFilter.h"/>
+      <FILE id="zDRKEW" name="Resample.cc" compile="1" resource="0" file="Source/Resample.cc"/>
+      <FILE id="oisfIZ" name="Resample.h" compile="0" resource="0" file="Source/Resample.h"/>
       <FILE id="Wx8vwv" name="IirFilter.cpp" compile="1" resource="0" file="Source/IirFilter.cpp"/>
       <FILE id="L3gq4m" name="IirFilter.h" compile="0" resource="0" file="Source/IirFilter.h"/>
       <FILE id="l2bu82" name="DriveStage.cpp" compile="1" resource="0" file="Source/DriveStage.cpp"/>
@@ -27,7 +31,7 @@
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="../VST3 SDK">
+    <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="../VST3 SDK" extraCompilerFlags="-std=c++11">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="theAmp"/>

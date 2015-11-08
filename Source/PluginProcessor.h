@@ -14,7 +14,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "FenderEQ.h"
 #include "DriveStage.h"
-
+#include "Resample.h"
 
 //==============================================================================
 /**
@@ -72,6 +72,7 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheAmpAudioProcessor)
     FenderEQ fender;
     std::vector<DriveStage> driveStages;
+    Resample resample;
 };
 
 

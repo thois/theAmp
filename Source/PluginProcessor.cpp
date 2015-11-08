@@ -11,6 +11,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "FenderEQ.h"
+#include "Resample.h"
 
 //==============================================================================
 TheAmpAudioProcessor::TheAmpAudioProcessor()
@@ -126,11 +127,12 @@ void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-	fender.set_samplerate(sampleRate);
+  
+	fender.set_samplerate(2*sampleRate);
     fender.set_values(0.5, 0.5, 0.5);
-    driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 250));
-    driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 250));
-    driveStages.push_back(DriveStage(sampleRate, 6000, 70, 20, 0.008, 250));
+    driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 250));
+    driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 250));
+    driveStages.push_back(DriveStage(2*sampleRate, 6000, 70, 20, 0.008, 250));
 }
 
 void TheAmpAudioProcessor::releaseResources()
@@ -141,9 +143,11 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-  buffer = fender(buffer);
-  for (DriveStage& stage : driveStages)
-    buffer = stage(buffer);
+  buffer = resample.up(buffer);
+  fender(buffer);
+  //for (DriveStage& stage : driveStages)
+  //  stage(buffer);
+  buffer = resample.down(buffer);
 }
 
 //==============================================================================
