@@ -10,9 +10,10 @@
 #include <cmath>
 
 
-void FenderEQ::set_samplerate(double samplerate)
+void FenderEQ::set_samplerate_and_channels(double samplerate, int chanNumber)
 {
     fs = samplerate;
+    channels = chanNumber;
 }
 
 void FenderEQ::set_values(double low, double mid, double treble)
@@ -95,10 +96,10 @@ double FenderEQ::filter_sample(double sample, int channel)
 }
 
 AudioSampleBuffer& FenderEQ::operator() (AudioSampleBuffer& buffer) {
-	// TODO check AudioSampleBuffer for correct number of channels
 	for(size_t chan = 0; chan < channels; chan++) {
 		float* data = buffer.getWritePointer(chan);
 		for(size_t i = 0; i < buffer.getNumSamples(); i++)
 		  data[i] = filter_sample(data[i], chan);
 	}
+    return buffer;
 }
