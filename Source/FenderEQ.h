@@ -44,7 +44,7 @@ public:
     double filter_sample(double, int);
 
 	//Function to set correct samplerate:
-	void set_samplerate_and_channels(double, int);
+	void set_samplerate(double);
 
 	AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
     

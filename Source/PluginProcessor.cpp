@@ -128,7 +128,7 @@ void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
 void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
   
-	fender.set_samplerate_and_channels(2*sampleRate, getNumInputChannels());
+	fender.set_samplerate(2*sampleRate);
     fender.set_values(0.5, 0.5, 0.5);
     driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 250));
     driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 250));
