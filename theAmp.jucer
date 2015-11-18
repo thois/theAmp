@@ -3,8 +3,8 @@
 <JUCERPROJECT id="RAZ3Ng" name="theAmp" projectType="audioplug" version="1.0.0"
               bundleIdentifier="com.yourcompany.theAmp" includeBinaryInAppConfig="1"
               buildVST="1" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="0"
-              pluginName="theAmp" pluginDesc="theAmp" pluginManufacturer="yourcompany"
-              pluginManufacturerCode="Manu" pluginCode="Raz3" pluginChannelConfigs="{1, 1}, {2, 2}"
+              pluginName="theAmp" pluginDesc="theAmp" pluginManufacturer="AaltoSoDiS"
+              pluginManufacturerCode="sodi" pluginCode="Amp" pluginChannelConfigs="{1, 1}, {2, 2}"
               pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
               pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="theAmpAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.theAmp"
@@ -80,6 +80,30 @@
         <MODULEPATH id="juce_audio_basics" path="../../../../Applications/Juce/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <VS2015 targetFolder="Builds/VisualStudio2015" vstFolder="C:\Users\Roope\Documents\VST3 SDK">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="theAmp"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="theAmp"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_video" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_opengl" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_gui_extra" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_gui_basics" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_graphics" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_events" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_data_structures" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_cryptography" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_core" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_audio_processors" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_audio_formats" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_audio_devices" path="..\..\Juce\modules"/>
+        <MODULEPATH id="juce_audio_basics" path="..\..\Juce\modules"/>
+      </MODULEPATHS>
+    </VS2015>
   </EXPORTFORMATS>
   <MODULES>
     <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
