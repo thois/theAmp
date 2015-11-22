@@ -238,6 +238,7 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
+<<<<<<< HEAD
     buffer = resample.up(buffer);
     fender(buffer);
     for (DriveStage& stage : driveStages)
@@ -258,6 +259,13 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
         lastPosInfo.resetToDefault();
     }
      */
+=======
+  buffer = resample.up(buffer);
+  fender(buffer);
+  for (DriveStage& stage : driveStages)
+    stage(buffer);
+  buffer = resample.down(buffer);
+>>>>>>> master
 }
 /*
 void TheAmpAudioProcessor::changeEQ()
