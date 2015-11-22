@@ -1,30 +1,31 @@
 %% sodis projekti - suodattimien suunnittelu
 
 % upsampling
-% tiedosto jossa kaveri soitti yhdellä luennolla kitaraa
+% tiedosto jossa kaveri soitti yhdellï¿½ luennolla kitaraa
 % fs = 48000
-[x, fs] = audioread('kitara.wav');
+[x, fs] = audioread('guitar.wav');
+soundsc(x,fs);
 % taajuuskuvaa
 figure(1);
 plotFFT(x,fs, 'linear');
-% tässä saan interpoloivan lowpass filterin tiedot
+% tï¿½ssï¿½ saan interpoloivan lowpass filterin tiedot
 [filtertiedot, b] = interp(x,2);
-% Lisätään nollia, joka toinen nolla joka toinen numero sisääntulosta
+% Lisï¿½tï¿½ï¿½n nollia, joka toinen nolla joka toinen numero sisï¿½ï¿½ntulosta
 ups = upsample(x,2);
-% Filtteröin upsamplatun kokeilu
+% Filtterï¿½in upsamplatun kokeilu
 ups2 = filter(b,1,ups);
 
 %% Downsamplinki
 
 
 % lowpass filtteri joka suodattaa pois kaikki yli 24000 Hz taajuudet
-% 24kHz saatu siitä että fs/2 = 48 kHz ja jaetan se vielä downsampling
-% ratiolla joka on 2 tässä
-FIRkokeilu = designfilt('lowpassfir', 'FilterOrder', 17, ...
-                'PassbandFrequency', 24000, 'StopbandFrequency', 30000, ...
-                'SampleRate' , 96000);
+% 24kHz saatu siitï¿½ ettï¿½ fs/2 = 48 kHz ja jaetan se vielï¿½ downsampling
+% ratiolla joka on 2 tï¿½ssï¿½
+FIRkokeilu = designfilt('lowpassfir','StopbandAttenuation',40 , ...
+                'PassbandFrequency', 18000, 'StopbandFrequency', 24000, ...
+                'SampleRate' , 96000, 'DesignMethod','equiripple' );
 fvtool(FIRkokeilu)
-% Fitterin tiedot ylös
+% Fitterin tiedot ylï¿½s
 COFFERIT = FIRkokeilu.Coefficients;
 out = filter(FIRkokeilu, ups2);
 downis = downsample(out, 2);
