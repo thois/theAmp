@@ -20,10 +20,11 @@ AudioSampleBuffer Resample::up(AudioSampleBuffer &input){
       outputData[2*i+1] = 0; 
     }
   }
-  return input = lpfUp(output);
+  return lpfUp(output);
 }
 
 AudioSampleBuffer Resample::down(AudioSampleBuffer &input){
+  input = lpfDown(input);
   AudioSampleBuffer output(input.getNumChannels(), input.getNumSamples()/2);
   for (size_t chan2 = 0; chan2 < input.getNumChannels(); chan2++) {
     const float* inputData = input.getReadPointer(chan2);
@@ -33,5 +34,5 @@ AudioSampleBuffer Resample::down(AudioSampleBuffer &input){
 
     }
   }
-  return lpfDown(output);
+  return output;
 }
