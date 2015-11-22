@@ -131,8 +131,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Resample.cpp"/>
     <ClCompile Include="..\..\Source\FirFilter.cpp"/>
-    <ClCompile Include="..\..\Source\Resample.cc"/>
     <ClCompile Include="..\..\Source\IirFilter.cpp"/>
     <ClCompile Include="..\..\Source\DriveStage.cpp"/>
     <ClCompile Include="..\..\Source\FenderEQ.cpp"/>

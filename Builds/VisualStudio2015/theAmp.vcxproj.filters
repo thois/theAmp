@@ -322,10 +322,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\FirFilter.cpp">
+    <ClCompile Include="..\..\Source\Resample.cpp">
       <Filter>theAmp\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Resample.cc">
+    <ClCompile Include="..\..\Source\FirFilter.cpp">
       <Filter>theAmp\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\IirFilter.cpp">

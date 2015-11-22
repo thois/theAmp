@@ -49,8 +49,8 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/Resample_bc61f5a6.o \
   $(OBJDIR)/FirFilter_221cc648.o \
-  $(OBJDIR)/Resample_f58f8bfd.o \
   $(OBJDIR)/IirFilter_eda5d9cb.o \
   $(OBJDIR)/DriveStage_36ba4b1d.o \
   $(OBJDIR)/FenderEQ_3e8885d7.o \
@@ -90,14 +90,14 @@ strip:
 	@echo Stripping theAmp
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
 
+$(OBJDIR)/Resample_bc61f5a6.o: ../../Source/Resample.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Resample.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/FirFilter_221cc648.o: ../../Source/FirFilter.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling FirFilter.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Resample_f58f8bfd.o: ../../Source/Resample.cc
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Resample.cc"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/IirFilter_eda5d9cb.o: ../../Source/IirFilter.cpp

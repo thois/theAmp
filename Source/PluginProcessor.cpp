@@ -78,6 +78,7 @@ TheAmpAudioProcessor::TheAmpAudioProcessor()
 
     lastUIWidth = 400;
     lastUIHeight = 200;
+    gain = defaultGain;
     
     lastPosInfo.resetToDefault();
     fender.set_values(0.5, 0.5, 0.5);
@@ -239,8 +240,8 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 {
     buffer = resample.up(buffer);
     fender(buffer);
-    //for (DriveStage& stage : driveStages)
-    //  stage(buffer);
+    for (DriveStage& stage : driveStages)
+      stage(buffer);
     buffer = resample.down(buffer);
     /*
     
