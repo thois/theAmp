@@ -62,10 +62,21 @@ public:
     void setCurrentProgram (int index) override;
     const String getProgramName (int index) override;
     void changeProgramName (int index, const String& newName) override;
+    void changeEQ ();
 
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    int lastUIWidth, lastUIHeight;
+    
+    AudioPlayHead::CurrentPositionInfo lastPosInfo;
+    
+    // Our parameters
+    AudioProcessorParameter* gain;
+    AudioProcessorParameter* treble;
+    AudioProcessorParameter* middle;
+    AudioProcessorParameter* bass;
 
 private:
     //==============================================================================

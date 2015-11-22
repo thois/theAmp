@@ -18,7 +18,9 @@
 //==============================================================================
 /**
 */
-class TheAmpAudioProcessorEditor  : public AudioProcessorEditor
+class TheAmpAudioProcessorEditor  : public AudioProcessorEditor,
+                                    public SliderListener,
+                                    public Timer
 {
 public:
     TheAmpAudioProcessorEditor (TheAmpAudioProcessor&);
@@ -26,12 +28,32 @@ public:
 
     //==============================================================================
     void paint (Graphics&) override;
+    void timerCallback() override;
     void resized() override;
+    void sliderValueChanged (Slider*) override;
+    void sliderDragStarted  (Slider*) override;
+    void sliderDragEnded    (Slider*) override;
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     TheAmpAudioProcessor& processor;
+    Label infoLabel, gainLabel, trebleLabel, middleLabel, bassLabel;
+    Slider gainSlider, trebleSlider, middleSlider, bassSlider;
+    ScopedPointer<ResizableCornerComponent> resizer;
+    ComponentBoundsConstrainer resizeLimits;
+    
+    AudioPlayHead::CurrentPositionInfo lastDisplayedPosition;
+    
+    //==============================================================================
+    TheAmpAudioProcessor& getProcessor() const
+    {
+        return static_cast<TheAmpAudioProcessor&> (processor);
+    }
+    
+    AudioProcessorParameter* getParameterFromSlider (const Slider*) const;
+    
+    void displayPositionInfo (const AudioPlayHead::CurrentPositionInfo& pos);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TheAmpAudioProcessorEditor)
 };
