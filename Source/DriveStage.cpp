@@ -1,11 +1,10 @@
 #include "DriveStage.h"
-#include <iostream>
 
-DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus) : rkRp(rkRp), vPlus(vPlus), lpfIn((double)lpfIn/fs, channels), lpfC((double)lpfC/fs, channels), lpfO((double)lpfO/fs, channels) { }
+DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus) : rkRp(rkRp), vPlus(vPlus), lpfIn((double)lpfIn/fs, channels), lpfC((double)lpfC/fs, channels), lpfO((double)lpfO/fs, channels) {}
 
 AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
-  if (channels != buffer.getNumSamples()) {
-    channels = buffer.getNumSamples();
+  if (channels != buffer.getNumChannels()) {
+    channels = buffer.getNumChannels();
     lpfIn.setChannels(channels);
     lpfC.setChannels(channels);
     lpfO.setChannels(channels);
