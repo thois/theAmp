@@ -45,6 +45,10 @@ public:
 
 	//Function to set correct samplerate:
 	void set_samplerate_and_channels(double, int);
+    
+    float get_low();
+    float get_middle();
+    float get_treble();
 
 	AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
     

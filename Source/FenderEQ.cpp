@@ -16,6 +16,19 @@ void FenderEQ::set_samplerate_and_channels(double samplerate, int chanNumber)
     channels = chanNumber;
 }
 
+float FenderEQ::get_low()
+{
+    return l;
+}
+float FenderEQ::get_middle()
+{
+    return m;
+}
+float FenderEQ::get_treble()
+{
+    return t;
+}
+
 void FenderEQ::set_values(double low, double mid, double treble)
 {
 	//This function updates the variables and transfer function's coefficients according to the changes user did to the potentiometers.

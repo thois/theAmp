@@ -12,7 +12,7 @@
 #include "PluginEditor.h"
 #include "FenderEQ.h"
 #include "Resample.h"
-
+/*
 class FloatParameter : public AudioProcessorParameter
 {
 public:
@@ -60,19 +60,22 @@ private:
     String name;
 };
 
-const float defaultGain = 1.0f;
 const float defaultTreble = 0.5f;
 const float defaultMiddle = 0.5f;
 const float defaultBass = 0.5f;
+*/
 
+const float defaultGain = 1.0f;
 //==============================================================================
 TheAmpAudioProcessor::TheAmpAudioProcessor()
 {
+    /*
     addParameter (gain  = new FloatParameter (defaultGain,  "gain"));
     addParameter (treble = new FloatParameter (defaultTreble, "treble"));
     addParameter (middle = new FloatParameter (defaultMiddle, "middle"));
-    addParameter (bass = new FloatParameter (defaultBass, "bass"));
-    
+     addParameter (bass = new FloatParameter (defaultBass, "bass"));
+     */
+
     lastUIWidth = 400;
     lastUIHeight = 200;
     
@@ -92,21 +95,51 @@ const String TheAmpAudioProcessor::getName() const
 
 int TheAmpAudioProcessor::getNumParameters()
 {
-    return 0;
+    return 4;
 }
 
 float TheAmpAudioProcessor::getParameter (int index)
 {
-    return 0.0f;
+    if (index == 0)
+        return gain;
+    else if (index == 1)
+        return fender.get_treble();
+    else if (index == 2)
+        return fender.get_middle();
+    else if (index == 3)
+        return fender.get_low();
+    else
+        return 0.f;
 }
 
 void TheAmpAudioProcessor::setParameter (int index, float newValue)
 {
+    if (newValue > 1)
+        newValue = 1;
+    if (newValue < 0)
+        newValue = 0;
+    if (index == 0)
+        gain = newValue;
+    if (index == 1)
+        fender.set_values(fender.get_low(), fender.get_middle(), newValue);
+    if (index == 2)
+        fender.set_values(fender.get_low(), newValue, fender.get_treble());
+    if (index == 3)
+        fender.set_values(newValue, fender.get_middle(), fender.get_treble());
 }
 
 const String TheAmpAudioProcessor::getParameterName (int index)
 {
-    return String();
+    if (index == 0)
+        return "gain";
+    else if (index == 1)
+        return "treble";
+    else if (index == 2)
+        return "middle";
+    else if (index == 3)
+        return "bass";
+    else
+        return "out of bounds";
 }
 
 const String TheAmpAudioProcessor::getParameterText (int index)
@@ -209,10 +242,10 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
     //for (DriveStage& stage : driveStages)
     //  stage(buffer);
     buffer = resample.down(buffer);
+    /*
     
     // ask the host for the current time so we can display it...
     AudioPlayHead::CurrentPositionInfo newTime;
-    
     if (getPlayHead() != nullptr && getPlayHead()->getCurrentPosition (newTime))
     {
         // Successfully got the current time from the host..
@@ -223,17 +256,19 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
         // If the host fails to fill-in the current time, we'll just clear it to a default..
         lastPosInfo.resetToDefault();
     }
+     */
 }
-
+/*
 void TheAmpAudioProcessor::changeEQ()
 {
     fender.set_values(bass->getValue(), middle->getValue(), treble->getValue());
 }
-
+*/
 //==============================================================================
 bool TheAmpAudioProcessor::hasEditor() const
 {
-    return true; // (change this to false if you choose to not supply an editor)
+    //return true; // (change this to false if you choose to not supply an editor)
+    return false;
 }
 
 AudioProcessorEditor* TheAmpAudioProcessor::createEditor()
@@ -247,19 +282,21 @@ void TheAmpAudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    /*
     // Create an outer XML element..
     XmlElement xml ("MYPLUGINSETTINGS");
     
     // add some attributes to it..
     xml.setAttribute ("uiWidth", lastUIWidth);
     xml.setAttribute ("uiHeight", lastUIHeight);
-    xml.setAttribute ("gain", gain->getValue());
+    xml.setAttribute ("gain", gain);
     xml.setAttribute ("treble", treble->getValue());
     xml.setAttribute ("middle", middle->getValue());
     xml.setAttribute ("bass", bass->getValue());
     
     // then use this helper function to stuff it into the binary blob and return it..
     copyXmlToBinary (xml, destData);
+    */
 }
 
 void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -267,8 +304,8 @@ void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInByte
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
     // This getXmlFromBinary() helper function retrieves our XML from the binary blob..
+    /*
     ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
-    
     if (xmlState != nullptr)
     {
         // make sure that it's actually our type of XML object..
@@ -284,6 +321,7 @@ void TheAmpAudioProcessor::setStateInformation (const void* data, int sizeInByte
             bass->setValue (xmlState->getDoubleAttribute ("bass", bass->getValue()));
         }
     }
+     */
 }
 
 //==============================================================================

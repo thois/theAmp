@@ -39,13 +39,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../Source/PluginProcessor.cpp"
-            timestampString = "469848866.495204"
+            filePath = "../../Source/PluginEditor.cpp"
+            timestampString = "469877920.433135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "TheAmpAudioProcessor::changeEQ()"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "TheAmpAudioProcessorEditor::sliderValueChanged (Slider* slider)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Source/FenderEQ.cpp"
-            timestampString = "469849296.305208"
+            timestampString = "469881875.174945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "FenderEQ::set_values(double low, double mid, double treble)"
             landmarkType = "5">
          </BreakpointContent>

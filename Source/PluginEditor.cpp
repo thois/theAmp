@@ -110,10 +110,10 @@ void TheAmpAudioProcessorEditor::timerCallback()
     if (lastDisplayedPosition != newPos)
         displayPositionInfo (newPos);
     
-    gainSlider.setValue (ourProcessor.gain->getValue(), dontSendNotification);
-    trebleSlider.setValue (ourProcessor.treble->getValue(), dontSendNotification);
-    middleSlider.setValue (ourProcessor.middle->getValue(), dontSendNotification);
-    bassSlider.setValue (ourProcessor.bass->getValue(), dontSendNotification);
+    //gainSlider.setValue (ourProcessor.gain->getValue(), dontSendNotification);
+    //trebleSlider.setValue (ourProcessor.treble->getValue(), dontSendNotification);
+    //middleSlider.setValue (ourProcessor.middle->getValue(), dontSendNotification);
+    //bassSlider.setValue (ourProcessor.bass->getValue(), dontSendNotification);
 }
 
 // This is our Slider::Listener callback, when the user drags a slider.
@@ -127,8 +127,8 @@ void TheAmpAudioProcessorEditor::sliderValueChanged (Slider* slider)
         param->setValueNotifyingHost ((float) slider->getValue());
         if (slider == &trebleSlider || slider == &middleSlider || slider == &bassSlider)
         {
-            TheAmpAudioProcessor& ourProcessor = getProcessor();
-            ourProcessor.changeEQ();
+            //TheAmpAudioProcessor& ourProcessor = getProcessor();
+            //ourProcessor.changeEQ();
         }
     }
 }
@@ -153,7 +153,7 @@ void TheAmpAudioProcessorEditor::sliderDragEnded (Slider* slider)
 //==============================================================================
 
 AudioProcessorParameter* TheAmpAudioProcessorEditor::getParameterFromSlider (const Slider* slider) const
-{
+{/*
     if (slider == &gainSlider)
         return getProcessor().gain;
     
@@ -165,7 +165,7 @@ AudioProcessorParameter* TheAmpAudioProcessorEditor::getParameterFromSlider (con
     
     if (slider == &bassSlider)
         return getProcessor().bass;
-    
+    */
     return nullptr;
 }
 
