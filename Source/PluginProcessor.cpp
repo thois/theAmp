@@ -44,7 +44,7 @@ int TheAmpAudioProcessor::getNumParameters()
 float TheAmpAudioProcessor::getParameter (int index)
 {
     if (index == 0)
-        return gain;
+        return 0.2*driveStages[0].getGain();
     else if (index == 1)
         return fender.get_treble();
     else if (index == 2)
@@ -62,7 +62,7 @@ void TheAmpAudioProcessor::setParameter (int index, float newValue)
     if (newValue < 0)
         newValue = 0;
     if (index == 0)
-        gain = newValue;
+      driveStages[0].setGain(newValue/0.2);
     if (index == 1)
         fender.set_values(fender.get_low(), fender.get_middle(), newValue);
     if (index == 2)
