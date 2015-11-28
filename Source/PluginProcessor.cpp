@@ -180,16 +180,11 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    buffer = resample.up(buffer);
-    fender(buffer);
-    for (DriveStage& stage : driveStages)
-      stage(buffer);
-    buffer = resample.down(buffer);
-  buffer = resample.up(buffer);
-  fender(buffer);
+  AudioSampleBuffer tmp = resample.up(buffer);
+  fender(tmp);
   for (DriveStage& stage : driveStages)
-    stage(buffer);
-  buffer = resample.down(buffer);
+    stage(tmp);
+  resample.down(tmp, buffer);
 }
 //==============================================================================
 bool TheAmpAudioProcessor::hasEditor() const

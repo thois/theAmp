@@ -13,9 +13,9 @@ class Resample {
 Resample();
 
 
-  AudioSampleBuffer up(AudioSampleBuffer &input);
+  AudioSampleBuffer up(AudioSampleBuffer& input);
 
-  AudioSampleBuffer down(AudioSampleBuffer &input);
+  AudioSampleBuffer& down(AudioSampleBuffer& input, AudioSampleBuffer& output);
 
 private:
 FirFilter lpfUp, lpfDown;

@@ -15,20 +15,20 @@ AudioSampleBuffer Resample::up(AudioSampleBuffer &input){
   for (size_t chan = 0; chan < input.getNumChannels(); chan++) {
     const float* inputData = input.getReadPointer(chan);
     float* outputData = output.getWritePointer(chan);
-    for (int i = 0; i> input.getNumSamples(); i++) {
+    for (int i = 0; i < input.getNumSamples(); i++) {
       outputData[2*i] = inputData[i];
       outputData[2*i+1] = 0; 
     }
   }
-  return lpfUp(output);
+  //return lpfUp(output);
+  return output;
 }
 
-AudioSampleBuffer Resample::down(AudioSampleBuffer &input){
-  input = lpfDown(input);
-  AudioSampleBuffer output(input.getNumChannels(), input.getNumSamples()/2);
-  for (size_t chan2 = 0; chan2 < input.getNumChannels(); chan2++) {
-    const float* inputData = input.getReadPointer(chan2);
-    float* outputData = output.getWritePointer(chan2);
+AudioSampleBuffer& Resample::down(AudioSampleBuffer& input, AudioSampleBuffer& output){
+  // input = lpfDown(input);
+  for (size_t chan = 0; chan < input.getNumChannels(); chan++) {
+    const float* inputData = input.getReadPointer(chan);
+    float* outputData = output.getWritePointer(chan);
     for (int i = 0; i < output.getNumSamples(); i++) {
       outputData[i] = inputData[2*i];
 

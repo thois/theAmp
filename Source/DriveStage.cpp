@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus) : rkRp(rkRp), vPlus(vPlus), lpfIn((double)lpfIn/fs, channels), lpfC((double)lpfC/fs, channels), lpfO((double)lpfO/fs, channels) {
-  readTubeFromFile("../../../../theAmp/Data/F_tube_1.txt");
+  readTubeFromFile("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
 }
 
 
@@ -25,20 +25,20 @@ AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
     float* data = buffer.getWritePointer(chan);
     for(size_t i = 0; i < buffer.getNumSamples(); i++) {
       float temp = lpfIn(gain*data[i], chan) + feedbackSample[chan];
-      temp = fTube(temp);
+      //temp = fTube(temp);
       feedbackSample[chan] = lpfC((vPlus - temp)*rkRp, chan);
-      data[i] = temp - lpfO(temp, chan);
+      //data[i] = temp - lpfO(temp, chan);
+      data[i] = fTube(gain*data[i]);
     }
   }
 }
 
-float DriveStage::fTube(float input) {
-  //std::cout << (input+1)/2*tube.size();
+float DriveStage::fTube(float input) { 
   int idx = (input+1)/2*tube.size();
   if (idx < 0)
     idx = 0;
   else if (idx >= tube.size())
-    idx = tube.size()-1;  
+  idx = tube.size()-1;  
   return tube[idx];
 }
 
@@ -51,9 +51,7 @@ void DriveStage::readTubeFromFile(std::string filename) {
   std::cout << "File opened" << std::endl;
   float tmp;
   while (file.good() && !file.eof()) {
-    std::cout << "Reading " << std::endl;
     file >> tmp;
-    //std::cout << tmp << std::endl;
     tube.push_back(tmp);
   }
   file.close();

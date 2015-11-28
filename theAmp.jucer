@@ -8,7 +8,7 @@
               pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
               pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="theAmpAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.theAmp"
-              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.2.0">
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.1.1">
   <MAINGROUP id="RMunW0" name="theAmp">
     <GROUP id="{8DA5E078-B0E1-41E6-A57B-AD1C7905AA98}" name="Source">
       <FILE id="TZWIH8" name="Resample.cpp" compile="1" resource="0" file="Source/Resample.cpp"/>
