@@ -167,9 +167,10 @@ void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
   
 	fender.set_samplerate_and_channels(2*sampleRate, getNumInputChannels());
-    driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 250));
-    driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 250));
-    driveStages.push_back(DriveStage(2*sampleRate, 6000, 70, 20, 0.008, 250));
+	// TODO How Vplus parameters are normalized?
+	driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 0.0025));
+	driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 0.0025));
+	driveStages.push_back(DriveStage(2*sampleRate, 6000, 70, 20, 0.008, 0.0025));
 }
 
 void TheAmpAudioProcessor::releaseResources()
@@ -180,11 +181,11 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-  AudioSampleBuffer tmp = resample.up(buffer);
-  fender(tmp);
+  //AudioSampleBuffer tmp = resample.up(buffer);
+  fender(buffer);
   for (DriveStage& stage : driveStages)
-    stage(tmp);
-  resample.down(tmp, buffer);
+    stage(buffer);
+  //resample.down(tmp, buffer);
 }
 //==============================================================================
 bool TheAmpAudioProcessor::hasEditor() const

@@ -13,7 +13,7 @@ AudioSampleBuffer FirFilter::operator() (AudioSampleBuffer& input) {
       for (int nx = 0; nx < coefficients.size(); nx++) {
 	if (n-nx < 0)
 	  break;
-	filteredData[n] = filteredData[n] + inputData[n-nx]*coefficients[nx];
+	filteredData[n] += inputData[n-nx]*coefficients[nx];
       }
     }
   }

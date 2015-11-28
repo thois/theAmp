@@ -8,7 +8,7 @@ class FirFilter {
 
 public:
 
-FirFilter();
+  FirFilter();
 
 FirFilter(std::vector<double> coefficients);
 
