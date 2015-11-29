@@ -3,9 +3,14 @@
 #include <fstream>
 #include <stdexcept>
 #include <unistd.h>
+#include "FileReader.h"
 
 DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus) : rkRp(rkRp), vPlus(vPlus), lpfIn((double)lpfIn/fs, channels), lpfC((double)lpfC/fs, channels), lpfO((double)lpfO/fs, channels) {
-  readTubeFromFile("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
+  std::ifstream file;
+  file.open("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
+  myFileReader(file, tube);
+  file.close();
+  //readTubeFromFile("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
 }
 
 

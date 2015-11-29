@@ -49,6 +49,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/FileReader_fd65fb68.o \
   $(OBJDIR)/Resample_bc61f5a6.o \
   $(OBJDIR)/FirFilter_221cc648.o \
   $(OBJDIR)/IirFilter_eda5d9cb.o \
@@ -89,6 +90,11 @@ clean:
 strip:
 	@echo Stripping theAmp
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/FileReader_fd65fb68.o: ../../Source/FileReader.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling FileReader.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Resample_bc61f5a6.o: ../../Source/Resample.cpp
 	-@mkdir -p $(OBJDIR)
