@@ -39,12 +39,15 @@ AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
 }
 
 float DriveStage::fTube(float input) { 
-  int idx = (input+1)/2*tube.size();
+  double idx = (input+1)/2*tube.size();
+  double weight = idx - (int)idx;
+  
   if (idx < 0)
-    idx = 0;
-  else if (idx >= tube.size())
-  idx = tube.size()-1;  
-  return tube[idx];
+    return tube[0];
+
+  else if (idx >= tube.size()-1)
+    return tube[tube.size()-1];
+  return (weight*tube[(int)idx]+(1-weight)*tube[(int)idx+1])/2;
 }
 
 double DriveStage::getGain() {
