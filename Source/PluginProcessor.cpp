@@ -198,12 +198,12 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-  //AudioSampleBuffer tmp = resample.up(buffer);
+  AudioSampleBuffer tmp = resample.up(buffer);
   fender(buffer);
   //driveStages[0](buffer);
   for (DriveStage& stage : driveStages)
     stage(buffer);
-  //resample.down(tmp, buffer);
+  resample.down(tmp, buffer);
 }
 //==============================================================================
 bool TheAmpAudioProcessor::hasEditor() const
