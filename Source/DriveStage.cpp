@@ -6,11 +6,7 @@
 #include "FileReader.h"
 
 DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus) : rkRp(rkRp), vPlus(vPlus), lpfIn((double)lpfIn/fs, channels), lpfC((double)lpfC/fs, channels), lpfO((double)lpfO/fs, channels) {
-  std::ifstream file;
-  file.open("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
-  myFileReader(file, tube);
-  file.close();
-  //readTubeFromFile("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt");
+  fileReader("../../../../theAmp/Data/13_kitaravahvistin_F_tube_1_scaled.txt", tube);
 }
 
 
@@ -49,21 +45,6 @@ float DriveStage::fTube(float input) {
   else if (idx >= tube.size())
   idx = tube.size()-1;  
   return tube[idx];
-}
-
-void DriveStage::readTubeFromFile(std::string filename) {
-  char result[ PATH_MAX ];
-  getcwd(result, PATH_MAX );
-  std::cout << "Path: " << std::string(result) << std::endl;
-  std::ifstream file;
-  file.open(filename);
-  std::cout << "File opened" << std::endl;
-  float tmp;
-  while (file.good() && !file.eof()) {
-    file >> tmp;
-    tube.push_back(tmp);
-  }
-  file.close();
 }
 
 double DriveStage::getGain() {

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-void myFileReader(std::ifstream& file, std::vector<float>& res);
+void fileReader(const std::string& filename, std::vector<float>& res);
 
 
 #endif

@@ -24,8 +24,6 @@ private:
  double rkRp, vPlus;
  IirFilter lpfIn, lpfC, lpfO;
  std::vector<float> feedbackSample, tube;
- 
- void readTubeFromFile(std::string filename);
 
  float fTube(float input);
 
