@@ -3,7 +3,7 @@
 
 FirFilter::FirFilter() {};
 
-FirFilter::FirFilter(std::vector<double> coefficients) : coefficients(coefficients) {
+FirFilter::FirFilter(std::vector<float> coefficients) : coefficients(coefficients) {
 
 }
 

@@ -25,12 +25,12 @@ AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
   for(size_t chan = 0; chan < channels; chan++) {
     float* data = buffer.getWritePointer(chan);
     for(size_t i = 0; i < buffer.getNumSamples(); i++) {
-      float temp = lpfIn(gain*data[i], chan) + feedbackSample[chan];
-      //float temp = gain*data[i] + feedbackSample[chan];
+      //float temp = lpfIn(gain*data[i], chan) + feedbackSample[chan];
+      float temp = gain*data[i] + feedbackSample[chan];
       temp = fTube(temp);
       feedbackSample[chan] = lpfC((vPlus - temp)*rkRp, chan);
       //feedbackSample[chan] = lpfC((0.0 - temp)*rkRp, chan);
-      //feedbackSample[chan] = 0-temp*rkRp;
+      feedbackSample[chan] = (vPlus - temp)*rkRp;
       data[i] = temp;
       //data[i] = temp - lpfO(temp, chan);
       //data[i] = fTube(gain*data[i]);
@@ -41,10 +41,8 @@ AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
 float DriveStage::fTube(float input) { 
   double idx = (input+1)/2*tube.size();
   double weight = idx - (int)idx;
-  
   if (idx < 0)
     return tube[0];
-
   else if (idx >= tube.size()-1)
     return tube[tube.size()-1];
   return (weight*tube[(int)idx]+(1-weight)*tube[(int)idx+1])/2;

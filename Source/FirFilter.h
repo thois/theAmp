@@ -10,13 +10,13 @@ public:
 
   FirFilter();
 
-FirFilter(std::vector<double> coefficients);
+FirFilter(std::vector<float> coefficients);
 
 AudioSampleBuffer operator() (AudioSampleBuffer& input);
 
 
 private:
-std::vector<double> coefficients;
+std::vector<float> coefficients;
 AudioSampleBuffer cBuffer;
 int wp = 0;
 };

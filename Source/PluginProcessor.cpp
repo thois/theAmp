@@ -202,7 +202,7 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
   fender(buffer);
   //driveStages[0](buffer);
   for (DriveStage& stage : driveStages)
-    stage(buffer);
+    stage(tmp);
   resample.down(tmp, buffer);
 }
 //==============================================================================

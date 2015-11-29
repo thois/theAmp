@@ -1,5 +1,5 @@
-#ifndef MYFILEREADER_H
-#define MYFILEREADER_H
+#ifndef FILEREADER_H
+#define FILEREADER_H
 #include <vector>
 #include <string>
 #include <iostream>
