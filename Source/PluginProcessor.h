@@ -15,6 +15,7 @@
 #include "FenderEQ.h"
 #include "DriveStage.h"
 #include "Resample.h"
+#include "FirFilter.h"
 
 //==============================================================================
 /**
@@ -86,6 +87,7 @@ private:
     FenderEQ fender;
     std::vector<DriveStage> driveStages;
     Resample resample;
+    FirFilter speakerModel;
 };
 
 

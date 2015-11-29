@@ -12,7 +12,7 @@
 #include "PluginEditor.h"
 #include "FenderEQ.h"
 #include "Resample.h"
-
+#include "FileReader.h"
 
 const float defaultGain = 1.0f;
 //==============================================================================
@@ -188,6 +188,9 @@ void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 	driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 0.0025));
 	driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 0.0025));
 	driveStages.push_back(DriveStage(sampleRate, 6000, 70, 20, 0.008, 0.0025));
+	std::vector<float> coefficients;
+	fileReader("../../../../theAmp/Data/13_kitaravahvistin_vint30m_44k1.txt", coefficients);
+	speakerModel = FirFilter(coefficients);
 }
 
 void TheAmpAudioProcessor::releaseResources()
@@ -203,6 +206,7 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
   //driveStages[0](buffer);
   for (DriveStage& stage : driveStages)
     stage(tmp);
+  tmp = speakerModel(tmp);
   resample.down(tmp, buffer);
 }
 //==============================================================================
