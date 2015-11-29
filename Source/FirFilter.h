@@ -14,9 +14,11 @@ FirFilter(std::vector<double> coefficients);
 
 AudioSampleBuffer operator() (AudioSampleBuffer& input);
 
+
 private:
 std::vector<double> coefficients;
-
+AudioSampleBuffer cBuffer;
+int wp = 0;
 };
 
 #endif
