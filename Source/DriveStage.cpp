@@ -30,8 +30,8 @@ AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
       feedbackSample[chan] = lpfC((vPlus - temp)*rkRp, chan);
       //feedbackSample[chan] = lpfC((0.0 - temp)*rkRp, chan);
       //feedbackSample[chan] = 0-temp*rkRp;
-      //data[i] = temp;
-      data[i] = temp - lpfO(temp, chan);
+      data[i] = temp;
+      //data[i] = temp - lpfO(temp, chan);
       //data[i] = fTube(gain*data[i]);
     }
   }

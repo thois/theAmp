@@ -11,6 +11,8 @@
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.1.1">
   <MAINGROUP id="RMunW0" name="theAmp">
     <GROUP id="{8DA5E078-B0E1-41E6-A57B-AD1C7905AA98}" name="Source">
+      <FILE id="AclAvx" name="FileReader.cpp" compile="1" resource="0" file="Source/FileReader.cpp"/>
+      <FILE id="UbglkH" name="FileReader.h" compile="0" resource="0" file="Source/FileReader.h"/>
       <FILE id="TZWIH8" name="Resample.cpp" compile="1" resource="0" file="Source/Resample.cpp"/>
       <FILE id="pQ8Q8r" name="FirFilter.cpp" compile="1" resource="0" file="Source/FirFilter.cpp"/>
       <FILE id="MyWNgm" name="FirFilter.h" compile="0" resource="0" file="Source/FirFilter.h"/>

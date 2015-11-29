@@ -322,6 +322,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\FileReader.cpp">
+      <Filter>theAmp\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Resample.cpp">
       <Filter>theAmp\Source</Filter>
     </ClCompile>
@@ -1599,6 +1602,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\FileReader.h">
+      <Filter>theAmp\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\FirFilter.h">
       <Filter>theAmp\Source</Filter>
     </ClInclude>

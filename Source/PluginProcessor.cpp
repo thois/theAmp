@@ -38,21 +38,26 @@ const String TheAmpAudioProcessor::getName() const
 
 int TheAmpAudioProcessor::getNumParameters()
 {
-    return 4;
+    return 6;
 }
 
 float TheAmpAudioProcessor::getParameter (int index)
 {
-    if (index == 0)
-        return 0.2*driveStages[0].getGain();
-    else if (index == 1)
-        return fender.get_treble();
-    else if (index == 2)
-        return fender.get_middle();
-    else if (index == 3)
-        return fender.get_low();
-    else
-        return 0.f;
+  switch (index) {
+  case 0:
+    return 0.2*driveStages[0].getGain();
+  case 1:
+    return 0.2*driveStages[1].getGain();
+  case 2:
+    return 0.2*driveStages[1].getGain();
+  case 3:
+    return fender.get_treble();
+  case 4:
+    return fender.get_middle();
+  case 5:
+    return fender.get_low();
+  }
+  return 0.f;
 }
 
 void TheAmpAudioProcessor::setParameter (int index, float newValue)
@@ -61,25 +66,37 @@ void TheAmpAudioProcessor::setParameter (int index, float newValue)
         newValue = 1;
     if (newValue < 0)
         newValue = 0;
-    if (index == 0)
+    switch (index) {
+    case 0:
       driveStages[0].setGain(newValue/0.2);
-    if (index == 1)
+      break;
+    case 1:
+      driveStages[1].setGain(newValue/0.2);
+      break;
+    case 2:
+      driveStages[2].setGain(newValue/0.2);
+      break;
+    case 3:
         fender.set_values(fender.get_low(), fender.get_middle(), newValue);
-    if (index == 2)
+	break;
+    case 4:
         fender.set_values(fender.get_low(), newValue, fender.get_treble());
-    if (index == 3)
+	break;
+    case 5:
         fender.set_values(newValue, fender.get_middle(), fender.get_treble());
+	break;
+    }
 }
 
 const String TheAmpAudioProcessor::getParameterName (int index)
 {
-    if (index == 0)
+  if (index >= 0 && index < 3)
         return "gain";
-    else if (index == 1)
-        return "treble";
-    else if (index == 2)
-        return "middle";
     else if (index == 3)
+        return "treble";
+    else if (index == 4)
+        return "middle";
+    else if (index == 5)
         return "bass";
     else
         return "out of bounds";
@@ -166,11 +183,11 @@ void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
 void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
   
-	fender.set_samplerate_and_channels(2*sampleRate, getNumInputChannels());
+	fender.set_samplerate_and_channels(sampleRate, getNumInputChannels());
 	// TODO How Vplus parameters are normalized?
-	driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 0.0025));
-	driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 0.0025));
-	driveStages.push_back(DriveStage(2*sampleRate, 6000, 70, 20, 0.008, 0.0025));
+	driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 0.0025));
+	driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 0.0025));
+	driveStages.push_back(DriveStage(sampleRate, 6000, 70, 20, 0.008, 0.0025));
 }
 
 void TheAmpAudioProcessor::releaseResources()
@@ -183,6 +200,7 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 {
   //AudioSampleBuffer tmp = resample.up(buffer);
   fender(buffer);
+  //driveStages[0](buffer);
   for (DriveStage& stage : driveStages)
     stage(buffer);
   //resample.down(tmp, buffer);
