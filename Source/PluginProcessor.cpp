@@ -201,12 +201,12 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-  AudioSampleBuffer tmp = resample.up(buffer);
-  fender(buffer);
-  //driveStages[0](buffer);
+  AudioSampleBuffer tmp;
+  resample.up(buffer, tmp);
   for (DriveStage& stage : driveStages)
     stage(tmp);
-  tmp = speakerModel(tmp);
+  fender(tmp);
+  //speakerModel(tmp);
   resample.down(tmp, buffer);
 }
 //==============================================================================

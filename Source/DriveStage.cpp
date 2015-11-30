@@ -13,32 +13,36 @@ DriveStage::DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, doubl
 
 AudioSampleBuffer& DriveStage::operator() (AudioSampleBuffer& buffer) {
   if (channels != buffer.getNumChannels()) {
+    // Initialize filters
     channels = buffer.getNumChannels();
     lpfIn.setChannels(channels);
     lpfC.setChannels(channels);
     lpfO.setChannels(channels);
     
-
-    // Initialize last samples buffer
+    // Initialize buffer
     feedbackSample = std::vector<float>(channels, 0.0);
   }
+
+  // Real processing happens here. Please see block diagram
   for(size_t chan = 0; chan < channels; chan++) {
     float* data = buffer.getWritePointer(chan);
     for(size_t i = 0; i < buffer.getNumSamples(); i++) {
+
+      // Filters disabled
       //float temp = lpfIn(gain*data[i], chan) + feedbackSample[chan];
       float temp = gain*data[i] + feedbackSample[chan];
       temp = fTube(temp);
-      feedbackSample[chan] = lpfC((vPlus - temp)*rkRp, chan);
-      //feedbackSample[chan] = lpfC((0.0 - temp)*rkRp, chan);
+      // Filters disabled
+      //feedbackSample[chan] = lpfC((vPlus - temp)*rkRp, chan);
       feedbackSample[chan] = (vPlus - temp)*rkRp;
       data[i] = temp;
+      //Filters disabled
       //data[i] = temp - lpfO(temp, chan);
-      //data[i] = fTube(gain*data[i]);
     }
   }
 }
 
-float DriveStage::fTube(float input) { 
+float DriveStage::fTube(float input) const { 
   double idx = (input+1)/2*tube.size();
   double weight = idx - (int)idx;
   if (idx < 0)
@@ -48,7 +52,7 @@ float DriveStage::fTube(float input) {
   return (weight*tube[(int)idx]+(1-weight)*tube[(int)idx+1])/2;
 }
 
-double DriveStage::getGain() {
+double DriveStage::getGain() const {
   return gain;
 }
 
