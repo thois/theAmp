@@ -10,26 +10,26 @@
 #include <cmath>
 
 
-void FenderEQ::set_samplerate_and_channels(double samplerate, int chanNumber)
+void FenderEQ::setSamplerateAndChannels(double samplerate, int chanNumber)
 {
     fs = samplerate;
     channels = chanNumber;
 }
 
-float FenderEQ::get_low()
+float FenderEQ::getLow()
 {
     return l;
 }
-float FenderEQ::get_middle()
+float FenderEQ::getMiddle()
 {
     return m;
 }
-float FenderEQ::get_treble()
+float FenderEQ::getTreble()
 {
     return t;
 }
 
-void FenderEQ::set_values(double low, double mid, double treble)
+void FenderEQ::setValues(double low, double mid, double treble)
 {
 	//This function updates the variables and transfer function's coefficients according to the changes user did to the potentiometers.
 	//Possible updates: update only neccessary vars depending on which potentiometers were changed.
@@ -92,7 +92,7 @@ void FenderEQ::set_values(double low, double mid, double treble)
 	A0 = A0 / A0;
 }
 
-double FenderEQ::filter_sample(double sample, int channel)
+double FenderEQ::filterSample(double sample, int channel)
 {
 	double output;
 	output = feedforward[2][channel] * B3 + feedforward[1][channel] * B2
@@ -112,7 +112,7 @@ AudioSampleBuffer& FenderEQ::operator() (AudioSampleBuffer& buffer) {
 	for(size_t chan = 0; chan < channels; chan++) {
 		float* data = buffer.getWritePointer(chan);
 		for(size_t i = 0; i < buffer.getNumSamples(); i++)
-		  data[i] = filter_sample(data[i], chan);
+		  data[i] = filterSample(data[i], chan);
 	}
     return buffer;
 }

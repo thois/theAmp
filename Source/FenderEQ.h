@@ -38,17 +38,17 @@ private:
     
 public:
     //Functions to set new values to the filter:
-    void set_values(double, double, double);
+    void setValues(double, double, double);
     
     //Function to filter data:
-    double filter_sample(double, int);
+    double filterSample(double, int);
 
 	//Function to set correct samplerate:
-	void set_samplerate_and_channels(double, int);
+	void setSamplerateAndChannels(double, int);
     
-    float get_low();
-    float get_middle();
-    float get_treble();
+    float getLow();
+    float getMiddle();
+    float getTreble();
 
 	AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
     
