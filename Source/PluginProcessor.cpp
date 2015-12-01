@@ -185,9 +185,9 @@ void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
   
 	fender.setSamplerateAndChannels(sampleRate, getNumInputChannels());
 	// TODO How Vplus parameters are normalized?
-	driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 0.0025));
-	driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 0.0025));
-	driveStages.push_back(DriveStage(sampleRate, 6000, 70, 20, 0.008, 0.0025));
+	driveStages.push_back(DriveStage(2*sampleRate, 15000, 50, 20, 0.015, 0.0025));
+	driveStages.push_back(DriveStage(2*sampleRate, 6000, 60, 20, 0.010, 0.0025));
+	driveStages.push_back(DriveStage(2*sampleRate, 6000, 70, 20, 0.008, 0.0025));
 	std::vector<float> coefficients;
 	fileReader("../../../../theAmp/Data/13_kitaravahvistin_vint30m_44k1.txt", coefficients);
 	speakerModel = FirFilter(coefficients);
