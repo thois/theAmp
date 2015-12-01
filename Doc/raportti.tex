@@ -109,7 +109,7 @@ Sovellettu digitaalinen signaalinkäsittely \\
 
 	% Put your names and student numbers here. The '&' inserts a tab between the two fields
 	Roope Kiiski & 217974 \\
-	Niko Lindvall & number \\
+	Niko Lindvall & 350051 \\
 	Alvar Wegelius & 296623 \\
  	\end{tabular} \par}
 
@@ -169,10 +169,10 @@ Tämän työn tarkoituksena on ohjelmoida kitaravahvistinmalli, joka kuulostaa o
 
 Kitaravahvistimen pääasiallinen tarkoitus on vahvistaa sähkökitarasta tuleva sähköinen signaali, mutta myös muokata sitä erilaisin tavoin, kuten esimerkiksi lisäämällä säröä. 
 Yksi merkittävä ero kitaravahvistimen ja geneerisen vahvistimen välillä on se, että kitaravahvistimen taajuusvaste ei edes pyri olemaan lineaarinen. 
-Säröä kitaravahvistin lisää joko leikkaamalla signaalia, tai vahvistamalla signaalia epälineaarisesti. . \cite{dafx}
+Säröä kitaravahvistin lisää joko leikkaamalla signaalia, tai vahvistamalla signaalia epälineaarisesti. \cite{dafx}
 
 Putkivahvistimet erityisesti tunnetaan omanlaisesta säröstään, joka johtuu vahvistinputkien siirtofunktion epälineaarisuudesta sekä siirtofunktion epäsymmetrisyydestä. 
-Tämä on havainnollisetettu kuvassa \ref{fig:tube_transf}, jossa on esitetty ensimmäisen vahvistinasteemme putken siirtofunktio.. \cite{dafx}
+Tämä on havainnollisetettu kuvassa \ref{fig:tube_transf}, jossa on esitetty ensimmäisen vahvistinasteemme putken siirtofunktio. \cite{dafx}
 
 \begin{figure}[h!]
 \includegraphics[width=1\textwidth, center]{tube_transf.png} \newline
@@ -189,19 +189,30 @@ Tässä työssä vahvistinputkea simuloidaan käyttämällä valmiiksi mitattuje
 \subsection{Työkalut}
 
 Kitaravahvistinmalli toteutettiin C++-kielellä käyttäen Juce-ympäristöä.
-Käytännössä eri algoritmeja testattiin Matlabissa, ja kun ne todettiin toimiviksi, siirrettiin ne C++-koodiksi.  
+Käytännössä joitain algoritmeja testattiin Matlabissa, ja kun ne todettiin toimiviksi, siirrettiin ne C++-koodiksi.
+Yksinkertaisemmat algoritmit toteutettiin suoraan C++:lla
 
 
 
 \section{Toteutus}
  
- \subsection{Up- ja downsamplays}
+ \subsection{Rakenne}
+  
+  \begin{figure}[h!]
+\includegraphics[width=1\textwidth, center]{ClassDiagram.eps} \newline
+\caption{Luokkakaavio.}
+\label{fig:ClassDiagram}
+\end{figure}
+  
+	Toteutuksen rakenteessa pyrittiin noudattamaan olio-ohjelmoinnin periaatteita. Ohjelman luokkakaavio on esitetty kuvassa \ref{fig:ClassDiagram}. Luokkakaaviossa on kuvattu vain oleelliset funktiot. PluginProcessor on VST-pluginin pääluokka, joka hoitaa eri osien yhteenliittämisen. Resample-luokka sisältää ylös- ja alasnäytteistyksen. FenderEQ:ssa on vastaavasti toteutettu ekvalisaattori. 
  
- Upsamplayksessä saatujen näytteiden väliin lisätään nollia. Tämän jälkeen saatu output suodatetaan interpoloivan alipäästösuodattimen läpi.
+ \subsection{Ylös- ja alasnäytteistys}
+ 
+Ylösnäytteistykessä signaalin näytteiden väliin lisätään nollia. Tämän jälkeen saatu ulostulo suodatetaan interpoloivan alipäästösuodattimen läpi.
 
-Downsamplayksessä saatu input ensin alipäästösuodatetaan ja tämän jälkeen outputista poimitaan joka toinen arvo.
+Alasnäytteistyksessä signaali ensin alipäästösuodatetaan ja tämän jälkeen siitä poimitaan joka toinen arvo.
 
-Up- ja downsamplayksessä käyettävät FIR-suodattimet osoittuivat ongelmallisiksi soittaessa aiheuttaen pauketta ja muita ongelmia. Korjausyrityksistä huolimatta suodattimet eivät toimineet halutulla tavalla joten pääätimme ottaa ne pois käytöstä. 
+Up- ja downsamplayksessä käytettävät FIR-suodattimet osoittuivat ongelmallisiksi soittaessa aiheuttaen pauketta ja muita artifakteja. Korjausyrityksistä huolimatta suodattimet eivät toimineet halutulla tavalla joten pääätimme ottaa ne pois käytöstä. 
 
 
 %Jos haluaa kirjoittaa koodia raporttiin, niin alla olevaa kannattaa hyödyntää:
