@@ -25,7 +25,7 @@ AudioSampleBuffer FirFilter::operator() (AudioSampleBuffer& input) {
 
 	filteredData[n] += p[(wp-nx+coefficients.size()) % coefficients.size()]*coefficients[nx];
       }
-      filteredData[n] /= 2;
+      filteredData[n] *= 200;
       //std::cout << coefficients.size()
 	//std::cout << p[(wp-1+coefficients.size()) % coefficients.size()] << std::endl;
       /*

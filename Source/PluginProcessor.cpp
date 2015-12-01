@@ -206,7 +206,7 @@ void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
   //driveStages[0](buffer);
   for (DriveStage& stage : driveStages)
     stage(tmp);
-  tmp = speakerModel(tmp);
+  //tmp = speakerModel(tmp);
   resample.down(tmp, buffer);
 }
 //==============================================================================
