@@ -1,5 +1,3 @@
-JuceLibraryCode
-
 # Compiled Object files
 *.slo
 *.lo
@@ -38,5 +36,7 @@ JuceLibraryCode
 *.blg
 Doc/*.log
 Doc/*.aux
+*.synctex.gz
 
-Builds/Linux/build/
+build
+Libs

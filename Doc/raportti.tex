@@ -204,7 +204,7 @@ Yksinkertaisemmat algoritmit toteutettiin suoraan C++:lla
 \label{fig:ClassDiagram}
 \end{figure}
   
-	Toteutuksen rakenteessa pyrittiin noudattamaan olio-ohjelmoinnin periaatteita. Ohjelman luokkakaavio on esitetty kuvassa \ref{fig:ClassDiagram}. Luokkakaaviossa on kuvattu vain oleelliset funktiot. PluginProcessor on VST-pluginin pääluokka, joka hoitaa eri osien yhteenliittämisen. Resample-luokka sisältää ylös- ja alasnäytteistyksen. FenderEQ:ssa on vastaavasti toteutettu ekvalisaattori. 
+	Toteutuksen rakenteessa pyrittiin noudattamaan olio-ohjelmoinnin periaatteita. Ohjelman luokkakaavio on esitetty kuvassa \ref{fig:ClassDiagram}. Luokkakaaviossa on kuvattu vain oleelliset funktiot. PluginProcessor on VST-pluginin pääluokka, joka hoitaa eri osien yhteenliittämisen. Resample-luokka sisältää ylös- ja alasnäytteistyksen. FenderEQ:ssa on vastaavasti toteutettu ekvalisaattori. Suodattimet on toteutettu myös erillisiksi luokikseen. Luokkiin toteutettiin funktio-operaattori, jolloin niiden käyttö on helppoa muusta ohjelmakoodista.
  
  \subsection{Ylös- ja alasnäytteistys}
  
@@ -276,16 +276,18 @@ Etenkin kun äänikortin bufferi asetetaan pieneksi, kasvaa ylimääräiset sär
 Lisäksi myös jotkin filtterimme aiheuttavat ääneen havaittavaa ylimääräistä säröä.
 Nämä ongelmat kuitenkin vaikuttavat olevan sellaisia, että niiden korjaaminen vaatii hyvin paljon perehtymistä ja aikaa, eikä se siten ole tämän kurssin puitteissa järkevää.
 
+Koodiin jäi ajanpuutteen vuoksi vielä joitain muotovirheitä. Lisäksi virhetarkistusta ei ole tehty käytännössä missään. Jos esimerkiksi tiedoston lukeminen menee pieleen, niin ohjelma kaatuu. Tämä ei valmiilta ohjelmalta olisi hyväksyttävää.
+
 
 \section{Johtopäätökset}
 
 Kokonaisuutena työ onnistui hyvin. 
 Aikataulujen kanssa oli välillä haasteita, mutta kokonaisuudessaan saimme mallimme toimimaan kuten alunperin oli tarkoituskin, vaikka ääneen jäi lopulta parantamisen varaa.
 Työstä mielenkiintoisen teki myös se, että eri ryhmän jäsenille eri asiat olivat uutta: osalle esimerkiksi C++-ohjelmointi oli uutta, kuten myös osalle Gitin käyttö versionhallinnointiin. 
-Toisaalta myös itse reaaliaikaisuus toi ohjelmointiin uusia asioita.
+Toisaalta myös itse reaaliaikaisuus toi ohjelmointiin uusia asioita. Signaalinkäsittelyllisesti työssä mentiin huomattavasti aiempia ohjelmointiprojekteja alemmalle tasolle. Virheiden etsiminen oli välillä todella haasteellista.
 
 Käytännössä tulevaisuudessa, jos työtä jatkaisi, pitäisi eri suodattimia parantaa, jotta eri artefaktit saadaan minimoitua.
-Myös graaffista käyttöliittymää voisi hioa, siitä voisi ajan kanssa tehdä vaikka kuinka hienon, mutta tämän kurssin puitteissa siihen ei ollut järkevää käyttää liikaa aikaa.
+Myös graafista käyttöliittymää voisi hioa, siitä voisi ajan kanssa tehdä vaikka kuinka hienon, mutta tämän kurssin puitteissa siihen ei ollut järkevää käyttää liikaa aikaa. Isoimpana ongelmana siinä on säätöarvojen skaalaus, jota ei keritty hioda hyväksi.
 
 
 
