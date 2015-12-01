@@ -30,3 +30,13 @@ JuceLibraryCode
 *.app
 
 *.xcuserstate
+
+# Backup files
+*.bak
+
+# Latex intermediate files
+*.blg
+Doc/*.log
+Doc/*.aux
+
+Builds/Linux/build/
