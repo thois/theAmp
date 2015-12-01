@@ -8,24 +8,25 @@
 
 class DriveStage {
 
-public:
+ public:
 
-DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus);
+  DriveStage(int fs, int lpfIn, int lpfC, int lpfO, double rkRp, double vPlus);
 
-AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
+  AudioSampleBuffer& operator() (AudioSampleBuffer& buffer);
 
-double getGain();
+  double getGain() const;
 
-void setGain(double gain);
+  void setGain(double gain);
 
-private:
- int channels = 0;
- double gain = 1;
- double rkRp, vPlus;
- IirFilter lpfIn, lpfC, lpfO;
- std::vector<float> feedbackSample, tube;
+ private:
+  int channels = 0;
+  double gain = 1;
+  double rkRp, vPlus;
+  IirFilter lpfIn, lpfC, lpfO;
+  std::vector<float> feedbackSample, tube;
 
- float fTube(float input);
+  // Makes tube amplification
+  float fTube(float input) const;
 
 };
 

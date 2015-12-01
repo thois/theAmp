@@ -2,23 +2,21 @@
 #define RESAMPLE_H
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include <cmath>
 #include "FirFilter.h"
-#include <vector>
 
 class Resample {
 
  public:
 
-Resample();
+  Resample();
 
 
-  AudioSampleBuffer up(AudioSampleBuffer& input);
+  AudioSampleBuffer& up(const AudioSampleBuffer& in, AudioSampleBuffer& out) const;
 
-  AudioSampleBuffer& down(AudioSampleBuffer& input, AudioSampleBuffer& output);
+  AudioSampleBuffer& down(const AudioSampleBuffer& in, AudioSampleBuffer& out)const;
 
-private:
-FirFilter lpfUp, lpfDown;
+ private:
+  FirFilter lpfUp, lpfDown;
 };
 
 #endif

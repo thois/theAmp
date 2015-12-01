@@ -6,19 +6,20 @@
 
 class FirFilter {
 
-public:
-
+ public:
+  
+  //TODO remove
   FirFilter();
 
-FirFilter(std::vector<float> coefficients);
+  FirFilter(std::vector<float> coefficients);
 
-AudioSampleBuffer operator() (AudioSampleBuffer& input);
+  AudioSampleBuffer& operator() (AudioSampleBuffer& input);
 
 
-private:
-std::vector<float> coefficients;
-AudioSampleBuffer cBuffer;
-int wp = 0;
+ private:
+  std::vector<float> coefficients;
+  AudioSampleBuffer cBuffer;
+  int wp = 0;
 };
 
 #endif

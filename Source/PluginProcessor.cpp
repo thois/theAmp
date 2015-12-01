@@ -23,7 +23,7 @@ TheAmpAudioProcessor::TheAmpAudioProcessor()
     gain = defaultGain;
     
     lastPosInfo.resetToDefault();
-    fender.set_values(0.5, 0.5, 0.5);
+    fender.setValues(0.5, 0.5, 0.5);
 }
 
 TheAmpAudioProcessor::~TheAmpAudioProcessor()
@@ -51,11 +51,11 @@ float TheAmpAudioProcessor::getParameter (int index)
   case 2:
     return 0.2*driveStages[1].getGain();
   case 3:
-    return fender.get_treble();
+    return fender.getTreble();
   case 4:
-    return fender.get_middle();
+    return fender.getMiddle();
   case 5:
-    return fender.get_low();
+    return fender.getLow();
   }
   return 0.f;
 }
@@ -77,13 +77,13 @@ void TheAmpAudioProcessor::setParameter (int index, float newValue)
       driveStages[2].setGain(newValue/0.2);
       break;
     case 3:
-        fender.set_values(fender.get_low(), fender.get_middle(), newValue);
+        fender.setValues(fender.getLow(), fender.getMiddle(), newValue);
 	break;
     case 4:
-        fender.set_values(fender.get_low(), newValue, fender.get_treble());
+        fender.setValues(fender.getLow(), newValue, fender.getTreble());
 	break;
     case 5:
-        fender.set_values(newValue, fender.get_middle(), fender.get_treble());
+        fender.setValues(newValue, fender.getMiddle(), fender.getTreble());
 	break;
     }
 }
@@ -183,7 +183,7 @@ void TheAmpAudioProcessor::changeProgramName (int index, const String& newName)
 void TheAmpAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
   
-	fender.set_samplerate_and_channels(sampleRate, getNumInputChannels());
+	fender.setSamplerateAndChannels(sampleRate, getNumInputChannels());
 	// TODO How Vplus parameters are normalized?
 	driveStages.push_back(DriveStage(sampleRate, 15000, 50, 20, 0.015, 0.0025));
 	driveStages.push_back(DriveStage(sampleRate, 6000, 60, 20, 0.010, 0.0025));
@@ -201,12 +201,12 @@ void TheAmpAudioProcessor::releaseResources()
 
 void TheAmpAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-  AudioSampleBuffer tmp = resample.up(buffer);
-  fender(buffer);
-  //driveStages[0](buffer);
+  AudioSampleBuffer tmp;
+  resample.up(buffer, tmp);
   for (DriveStage& stage : driveStages)
     stage(tmp);
-  //tmp = speakerModel(tmp);
+  fender(tmp);
+  //speakerModel(tmp);
   resample.down(tmp, buffer);
 }
 //==============================================================================
