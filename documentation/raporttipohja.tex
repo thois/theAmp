@@ -110,7 +110,7 @@ Sovellettu digitaalinen signaalinkäsittely \\
 	% Put your names and student numbers here. The '&' inserts a tab between the two fields
 	Roope Kiiski & 217974 \\
 	Niko Lindvall & number \\
-	Alvar Wegelius & number \\
+	Alvar Wegelius & 296623 \\
  	\end{tabular} \par}
 
 	\end{center}
@@ -196,6 +196,13 @@ Käytännössä eri algoritmeja testattiin Matlabissa, ja kun ne todettiin toimi
 \section{Toteutus}
  
  \subsection{Up- ja downsamplays}
+ 
+ Upsamplayksessä saatujen näytteiden väliin lisätään nollia. Tämän jälkeen saatu output suodatetaan interpoloivan alipäästösuodattimen läpi.
+
+Downsamplayksessä saatu input ensin alipäästösuodatetaan ja tämän jälkeen outputista poimitaan joka toinen arvo.
+
+Up- ja downsamplayksessä käyettävät FIR-suodattimet osoittuivat ongelmallisiksi soittaessa aiheuttaen pauketta ja muita ongelmia. Korjausyrityksistä huolimatta suodattimet eivät toimineet halutulla tavalla joten pääätimme ottaa ne pois käytöstä. 
+
 
 %Jos haluaa kirjoittaa koodia raporttiin, niin alla olevaa kannattaa hyödyntää:
 %\begin{lstlisting}[frame=lines]{C}

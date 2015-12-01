@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.80.0 (TeX Live 2015) (rev 5238)  (format=lualatex 2015.11.2)  30 NOV 2015 23:06
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015) (rev 5238)  (format=lualatex 2015.11.2)  1 DEC 2015 09:34
  restricted \write18 enabled.
 **raporttipohja.tex
 (./raporttipohja.tex
@@ -1026,36 +1026,36 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: drive.png Graphic file (type png)
 
 <use drive.png>
-Package pdftex.def Info: drive.png used on input line 218.
+Package pdftex.def Info: drive.png used on input line 225.
 (pdftex.def)             Requested size: 360.0pt x 129.47186pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 218--219
+Underfull \hbox (badness 10000) in paragraph at lines 225--226
 
  []
 
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 7.71893pt on input line 223.
+(Font)              scaled to size 7.71893pt on input line 230.
 LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
-(Font)              scaled to size 5.57996pt on input line 223.
+(Font)              scaled to size 5.57996pt on input line 230.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 223.
+(Font)              scaled to size 10.07397pt on input line 230.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 223.
+(Font)              scaled to size 7.63599pt on input line 230.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 223.
+(Font)              scaled to size 5.51999pt on input line 230.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 223.
+(Font)              scaled to size 10.07397pt on input line 230.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 223.
+(Font)              scaled to size 7.63599pt on input line 230.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 223.
+(Font)              scaled to size 5.51999pt on input line 230.
 <eq.png, id=18, 676.02562pt x 704.6325pt>
 File: eq.png Graphic file (type png)
  <use eq.png>
-Package pdftex.def Info: eq.png used on input line 235.
+Package pdftex.def Info: eq.png used on input line 242.
 (pdftex.def)             Requested size: 288.0011pt x 300.1906pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--236
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
@@ -1063,7 +1063,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 235--236
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (11.79211pt too wide) in paragraph at lines 245--247
+Overfull \hbox (11.79211pt too wide) in paragraph at lines 252--254
 [][]\T1/fnc/m/n/10.95 Käy-tän-nös-sä siis ekva-li-saat-to-ri to-teu-te-taan
  kol-man-nen as-teen IIR-suodattimena,
  []
@@ -1078,9 +1078,9 @@ Missing character: There is no ’ (U+2019) in font pncr8t!
 Here is how much of LuaTeX's memory you used:
  15603 strings out of 494693
  100000,383344 words of node,token memory allocated
- 386 words of node memory still in use:
+ 389 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 2 kern, 50 glue_spec, 1 write nodes
-   avail lists: 2:27,3:109,4:643,5:63,6:3232,7:126,9:115,10:629
+   avail lists: 2:27,3:118,4:640,5:55,6:3232,7:126,9:113,10:629
  18574 multiletter control sequences out of 65536+600000
  148 fonts using 5821119 bytes
  53i,7n,92p,1230b,353s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1089,7 +1089,7 @@ live/2015/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb><</usr/local/texl
 ive/2015/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb><</usr/local/texlive/201
 5/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb><</usr/local/texlive/2015/texmf
 -dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb>
-Output written on raporttipohja.pdf (6 pages, 182579 bytes).
+Output written on raporttipohja.pdf (6 pages, 183183 bytes).
 
 PDF statistics: 46 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream
