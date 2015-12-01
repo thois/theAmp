@@ -17,8 +17,8 @@ Juce
 BUILD AND DOWNLOAD LIBS
 ---------------------
 Linux: Run "./build.sh" to download and compile Irrlicht and compile the game
-OS X: TODO
-Windows: TODO
+OS X: Compile using xcode.
+Windows: If VSD and Juce folders are set correctly, should compile correctly using Visual Studio.
 
 USAGE
 -----
